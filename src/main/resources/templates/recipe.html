@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments :: head">
+</head>
+<body>
+<div th:replace="fragments :: header"></div>
+
+
+<div class="contentText">
+    <br>
+    <div>
+        <a class="btn btn-primary" href="/" role="button">Home</a>
+    </div>
+    <br>
+    <h1 style="text-align: center" class="mt-4">Recipe</h1>
+    <br>
+    <div class="row mb-2">
+        <div class="col-md-6">
+            <div th:each="recipe: ${recipe}"
+                 class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <div>
+                        <h2 th:text="${recipe.title}"></h2>
+                        <p th:text="|Preparation time: ${recipe.preparationTime} min|"></p>
+                        <p th:text="|Category: ${recipe.category}|"></p>
+                        <p th:text="|Portions: ${recipe.portions}|"></p>
+                        <!--                        <p th:text="|Ingredients: ${recipe.ingredients}|"></p>-->
+                        <p>Ingredients:</p>
+                        <li th:each="ingredient: ${recipe.ingredients}">
+                            <a th:href="'/ingredient/' + ${ingredient.id}"
+                               th:text="|${ingredient.name} ${ingredient.quantity}|"></a>
+                        </li>
+                        <br>
+                        <p th:text="|Description: ${recipe.description}|"></p>
+
+                        <a th:href="|/recipe/${recipe.id}/edit|" class="btn btn-primary mb-3">Edit</a>
+                        <a th:href="|/recipe/${recipe.id}/delete|" class="btn btn-primary mb-3">Delete</a>
+                        <a th:href="|/ingredient/add?recipeId=${recipe.id}|" class="btn btn-primary mb-3">Add
+                            ingredient</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
