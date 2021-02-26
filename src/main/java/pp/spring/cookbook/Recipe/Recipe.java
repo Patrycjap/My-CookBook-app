@@ -13,14 +13,16 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
+
     @Column(columnDefinition = "varchar(500)")
     private String description;
     private String preparationTime;
-    @Column(columnDefinition = "boolean default false")
-    private Boolean favorite = false;
+
     private int portions;
+
     @Enumerated(EnumType.STRING)
     private Category category;
+
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.REMOVE)
     private List<Ingredient> ingredients;
     private int countLike = 0;
@@ -55,14 +57,6 @@ public class Recipe {
 
     public void setPreparationTime(String preparationTime) {
         this.preparationTime = preparationTime;
-    }
-
-    public Boolean isFavorite() {
-        return favorite;
-    }
-
-    public void setFavorite(Boolean favorite) {
-        this.favorite = favorite;
     }
 
     public int getPortions() {

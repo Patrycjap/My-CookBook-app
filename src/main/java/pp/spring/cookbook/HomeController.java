@@ -3,20 +3,20 @@ package pp.spring.cookbook;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import pp.spring.cookbook.Recipe.RecipeRepository;
+import pp.spring.cookbook.Recipe.RecipeService;
 
 @Controller
 public class HomeController {
 
-    RecipeRepository recipeRepository;
+    RecipeService recipeService;
 
-    public HomeController(RecipeRepository recipeRepository) {
-        this.recipeRepository = recipeRepository;
+    public HomeController(RecipeService recipeService) {
+        this.recipeService = recipeService;
     }
 
     @GetMapping("/")
     public String home(Model model) {
-        model.addAttribute("bestRecipes", recipeRepository.findAllByFavoriteIsTrue());
+        model.addAttribute("bestRecipes", recipeService.findTop2ByOrderByCountLikeDesc());
         return "home";
     }
 }

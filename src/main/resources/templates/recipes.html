@@ -27,6 +27,7 @@
             <th>Category</th>
             <th>Preparation time</th>
             <th>Portions</th>
+            <th>Likes</th>
         </tr>
         </thead>
         <tbody>
@@ -38,6 +39,7 @@
             <td th:text="${recipe.category}"></td>
             <td th:text="${recipe.preparationTime}" style="text-align: center"></td>
             <td th:text="${recipe.portions}" style="text-align: center"></td>
+            <td th:text="${recipe.countLike}" style="text-align: center"></td>
         </tr>
         </tbody>
     </table>

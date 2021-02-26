@@ -10,8 +10,8 @@ import pp.spring.cookbook.Recipe.RecipeRepository;
 @Controller
 public class IngredientController {
 
-    IngredientRepository ingredientRepository;
-    RecipeRepository recipeRepository;
+    private final IngredientRepository ingredientRepository;
+    private final RecipeRepository recipeRepository;
 
     public IngredientController(IngredientRepository ingredientRepository, RecipeRepository recipeRepository) {
         this.ingredientRepository = ingredientRepository;
@@ -21,7 +21,8 @@ public class IngredientController {
     @GetMapping("/ingredient/add")
     public String addForm(Model model, @RequestParam(required = false, defaultValue = "1") Long recipeId) {
         Ingredient ingredient = new Ingredient();
-        ingredient.setRecipe(recipeRepository.findById(recipeId).orElse(null));
+        ingredient.setRecipe(recipeRepository.findById(recipeId)
+            .orElseThrow(() -> new IllegalArgumentException("Id not found")));
         model.addAttribute("ingredientAdd", ingredient);
         model.addAttribute("recipes", recipeRepository.findAll());
         return "ingredientAdd";

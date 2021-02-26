@@ -4,8 +4,6 @@
 </head>
 <body>
 <div th:replace="fragments :: header"></div>
-
-
 <div class="contentText">
     <br>
     <div>
@@ -20,23 +18,23 @@
                  class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                 <div class="col p-4 d-flex flex-column position-static">
                     <div>
+
                         <h2 th:text="${recipe.title}"></h2>
                         <p th:text="|Preparation time: ${recipe.preparationTime} min|"></p>
                         <p th:text="|Category: ${recipe.category}|"></p>
                         <p th:text="|Portions: ${recipe.portions}|"></p>
-                        <!--                        <p th:text="|Ingredients: ${recipe.ingredients}|"></p>-->
                         <p>Ingredients:</p>
                         <li th:each="ingredient: ${recipe.ingredients}">
-                            <a th:href="'/ingredient/' + ${ingredient.id}"
-                               th:text="|${ingredient.name} ${ingredient.quantity}|"></a>
+                            <a th:text="|${ingredient.name} ${ingredient.quantity}|"></a>
                         </li>
                         <br>
                         <p th:text="|Description: ${recipe.description}|"></p>
-
                         <a th:href="|/recipe/${recipe.id}/edit|" class="btn btn-primary mb-3">Edit</a>
                         <a th:href="|/recipe/${recipe.id}/delete|" class="btn btn-primary mb-3">Delete</a>
                         <a th:href="|/ingredient/add?recipeId=${recipe.id}|" class="btn btn-primary mb-3">Add
                             ingredient</a>
+                        <p th:text="|Likes: ${recipe.countLike}|"></p>
+                        <a th:href="|/recipe/${recipe.id}/like|" class="btn btn-primary mb-3">Like</a>
                     </div>
                 </div>
             </div>

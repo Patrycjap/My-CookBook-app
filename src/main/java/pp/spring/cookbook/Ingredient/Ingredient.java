@@ -12,6 +12,7 @@ public class Ingredient {
     private Long id;
     private String name;
     private String quantity;
+
     @ManyToOne
     private Recipe recipe;
 

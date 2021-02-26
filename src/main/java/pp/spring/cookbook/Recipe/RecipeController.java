@@ -13,20 +13,19 @@ import java.util.Optional;
 
 @Controller
 public class RecipeController {
-    private RecipeRepository recipeRepository;
 
-    public RecipeController(RecipeRepository recipeRepository) {
-        this.recipeRepository = recipeRepository;
+    private final RecipeService recipeService;
+
+    public RecipeController(RecipeService recipeService) {
+        this.recipeService = recipeService;
     }
-
-
     @GetMapping("/recipes")
     public String recipes(Model model, @RequestParam(required = false) Category category) {
         List<Recipe> recipes;
         if (category != null) {
-            recipes = recipeRepository.findByCategory(category);
+            recipes = recipeService.findByCategory(category);
         } else {
-            recipes = recipeRepository.findAll();
+            recipes = recipeService.findAllRecipes();
         }
 
         model.addAttribute("recipes", recipes);
@@ -35,10 +34,10 @@ public class RecipeController {
 
     @GetMapping("/recipe/{id}")
     public String showRecipe(@PathVariable Long id, Model model) {
-        Optional<Recipe> todoOptional = recipeRepository.findById(id);
+        Optional<Recipe> recipeShowOptional = recipeService.findById(id);
 
-        if (todoOptional.isPresent()) {
-            Recipe recipe = todoOptional.get();
+        if (recipeShowOptional.isPresent()) {
+            Recipe recipe = recipeShowOptional.get();
             model.addAttribute("recipe", recipe);
             return "recipe";
         } else {
@@ -48,9 +47,9 @@ public class RecipeController {
 
     @GetMapping("/recipe/{id}/edit")
     public String recipeEditForm(@PathVariable Long id, Model model) {
-        Optional<Recipe> todoOptional = recipeRepository.findById(id);
-        if (todoOptional.isPresent()) {
-            Recipe recipe = todoOptional.get();
+        Optional<Recipe> recipeEditOptional = recipeService.findById(id);
+        if (recipeEditOptional.isPresent()) {
+            Recipe recipe = recipeEditOptional.get();
             model.addAttribute("recipeEdit", recipe);
             return "recipeEdit";
         } else {
@@ -60,13 +59,10 @@ public class RecipeController {
 
     @PostMapping("/recipe/{id}/edit")
     public String editRecipe(@PathVariable Long id, Recipe recipe) {
-        Recipe recipeToEdit = recipeRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Id not found"));
-        recipeToEdit.setTitle(recipe.getTitle());
-        recipeToEdit.setDescription(recipe.getDescription());
-        recipeToEdit.setPortions(recipe.getPortions());
-        recipeToEdit.setCategory(recipe.getCategory());
-        recipeToEdit.setPreparationTime(recipe.getPreparationTime());
-        recipeRepository.save(recipeToEdit);
+        Recipe recipeToEdit = recipeService.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException("Id not found"));
+        recipeService.editRecipeService(recipe, id);
+        recipeService.save(recipeToEdit);
         return "redirect:/recipe/" + recipeToEdit.getId();
     }
 
@@ -78,13 +74,19 @@ public class RecipeController {
 
     @PostMapping("/recipe/add")
     public String addRecipe(Recipe recipe) {
-        recipeRepository.save(recipe);
+        recipeService.save(recipe);
         return "redirect:/recipes";
     }
 
     @GetMapping("/recipe/{id}/delete")
     public String delete(@PathVariable Long id) {
-        recipeRepository.deleteById(id);
+        recipeService.deleteById(id);
         return "redirect:/";
+    }
+
+    @GetMapping("/recipe/{id}/like")
+    public String addLike(@PathVariable Long id) {
+        recipeService.addLike(id);
+        return "redirect:/recipe/" + id;
     }
 }

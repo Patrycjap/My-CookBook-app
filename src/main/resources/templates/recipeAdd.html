@@ -40,7 +40,6 @@
         <div>
             <ul>
                 <li th:each="ingredient: ${recipeAdd.ingredients}">
-
                     <a th:href="'/ingredient/' + ${ingredient.id}" th:text="|${ingredient.name} ${ingredient.quantity}|"></a>
                 </li>
             </ul>

@@ -8,7 +8,6 @@ public enum Category {
     DESSERT("Desser"),
     DRINK("Drink");
 
-
     private String displayName;
 
     Category(String displayName) {
