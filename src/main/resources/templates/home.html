@@ -23,6 +23,8 @@
                         <p th:text="|Category: ${recipe.category}|"></p>
                         <p th:text="|Portions: ${recipe.portions}|"></p>
                         <a th:href="|/recipe/${recipe.id}|" class="btn btn-primary mb-3">Show recipe</a>
+                        <p th:text="|Likes: ${recipe.countLike}|"></p>
+                        <a th:href="|/recipe/${recipe.id}/like|" class="btn btn-primary mb-3">Like</a>
                     </div>
                 </div>
             </div>

@@ -8,8 +8,10 @@
     <br>
     <div>
         <a class="btn btn-primary" href="/" role="button">Home</a>
+        <a class="btn btn-primary" href="/recipes" role="button">All recipes</a>
     </div>
-    <h2 class="mt-4" style="text-align: center">Add new ingredient</h2>
+    <br>
+    <h2 style="text-align: center" class="mt-4">Add new ingredient</h2>
     <form th:action="|/ingredient/add|" method="post" th:object="${ingredientAdd}">
         <div class="mb-3">
             <label for="title" class="form-label">Name</label>

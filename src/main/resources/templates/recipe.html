@@ -8,6 +8,7 @@
     <br>
     <div>
         <a class="btn btn-primary" href="/" role="button">Home</a>
+        <a class="btn btn-primary" href="/recipes" role="button">All recipes</a>
     </div>
     <br>
     <h1 style="text-align: center" class="mt-4">Recipe</h1>
@@ -18,7 +19,6 @@
                  class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                 <div class="col p-4 d-flex flex-column position-static">
                     <div>
-
                         <h2 th:text="${recipe.title}"></h2>
                         <p th:text="|Preparation time: ${recipe.preparationTime} min|"></p>
                         <p th:text="|Category: ${recipe.category}|"></p>
@@ -40,7 +40,6 @@
             </div>
         </div>
     </div>
-
 </div>
 </body>
 </html>
