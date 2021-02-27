@@ -21,7 +21,7 @@
             <label for="quantity" class="form-label">Quantity</label>
             <input type="text" required class="form-control" id="quantity" th:field="*{quantity}">
         </div>
-        <select th:field="*{recipe}">
+        <select th:field="*{recipe}" hidden>
             <option th:each="recipe: ${recipes}" th:text="${recipe.title}" th:value="${recipe.id}"></option>
         </select>
         <p></p>

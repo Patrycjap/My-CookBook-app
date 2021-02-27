@@ -11,7 +11,6 @@ import pp.spring.cookbook.recipe.RecipeService;
 public class IngredientController {
 
     private final IngredientRepository ingredientRepository;
-//    private final RecipeRepository recipeRepository;
     private final RecipeService recipeService;
 
     public IngredientController(IngredientRepository ingredientRepository, RecipeService recipeService) {
