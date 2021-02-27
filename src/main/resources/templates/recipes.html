@@ -14,9 +14,9 @@
     <br>
     <h2 class="mt-4" style="text-align: center">List of recipes</h2>
     <br>
-    <a href="/recipes">All</a>
-    <div style="display: inline-block" th:each="category : ${T(pp.spring.cookbook.Category.Category).values()}">
-        <a th:href="|/recipes/?category=${category.name}|" th:text="${category.getDisplayName()}"></a>
+    <a href="/recipes" class="btn btn-primary">All</a>
+    <div style="display: inline-block" th:each="category : ${T(pp.spring.cookbook.category.Category).values()}">
+        <a th:href="|/recipes/?category=${category.name}|" th:text="${category.getDisplayName()}" class="btn btn-primary"></a>
         <span> </span>
     </div>
     <table class="table  mt-4">

@@ -1,4 +1,4 @@
-package pp.spring.cookbook.Category;
+package pp.spring.cookbook.category;
 
 public enum Category {
     BREAKFAST("Breakfast"),

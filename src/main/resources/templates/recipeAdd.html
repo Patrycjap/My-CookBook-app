@@ -25,7 +25,7 @@
             <label for="category" class="form-label">Category</label>
             <select class="form-select" required id="category" th:field="*{category}">
                 <option selected value="" hidden>Brak</option>
-                <option th:each="category : ${T(pp.spring.cookbook.Category.Category).values()}"
+                <option th:each="category : ${T(pp.spring.cookbook.category.Category).values()}"
                         th:value="${category}"
                         th:text="${category.displayName}">
                 </option>

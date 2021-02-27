@@ -1,7 +1,7 @@
-package pp.spring.cookbook.Recipe;
+package pp.spring.cookbook.recipe;
 
-import pp.spring.cookbook.Category.Category;
-import pp.spring.cookbook.Ingredient.Ingredient;
+import pp.spring.cookbook.category.Category;
+import pp.spring.cookbook.ingredient.Ingredient;
 
 import javax.persistence.*;
 import java.util.List;

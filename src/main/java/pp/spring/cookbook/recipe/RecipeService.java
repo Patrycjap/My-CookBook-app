@@ -1,7 +1,7 @@
-package pp.spring.cookbook.Recipe;
+package pp.spring.cookbook.recipe;
 
 import org.springframework.stereotype.Service;
-import pp.spring.cookbook.Category.Category;
+import pp.spring.cookbook.category.Category;
 
 import java.util.List;
 import java.util.Optional;
@@ -51,5 +51,9 @@ public class RecipeService {
 
     public void deleteById(Long id) {
         recipeRepository.deleteById(id);
+    }
+
+    public Object findAll() {
+        return recipeRepository.findAll();
     }
 }

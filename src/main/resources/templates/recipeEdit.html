@@ -23,7 +23,7 @@
             <label for="category" class="form-label">Category</label>
             <select class="form-select" required id="category" th:field="*{category}">
                 <option selected value="" hidden>Brak</option>
-                <option th:each="category : ${T(pp.spring.cookbook.Category.Category).values()}"
+                <option th:each="category : ${T(pp.spring.cookbook.category.Category).values()}"
                         th:value="${category}"
                         th:text="${category.displayName}">
                 </option>
@@ -41,7 +41,7 @@
             <p>Ingredients:</p>
             <ul>
                 <li th:each="ingredient: ${recipeEdit.ingredients}">
-                    <a th:href="'/ingredient/' + ${ingredient.id}" th:text="|${ingredient.name} ${ingredient.quantity}|"></a>
+                    <a th:text="|${ingredient.name} ${ingredient.quantity}|"></a>
                 </li>
             </ul>
         </div>

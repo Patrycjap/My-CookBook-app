@@ -1,6 +1,6 @@
-package pp.spring.cookbook.Ingredient;
+package pp.spring.cookbook.ingredient;
 
-import pp.spring.cookbook.Recipe.Recipe;
+import pp.spring.cookbook.recipe.Recipe;
 
 import javax.persistence.*;
 

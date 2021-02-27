@@ -1,4 +1,4 @@
-package pp.spring.cookbook.Recipe;
+package pp.spring.cookbook.recipe;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import pp.spring.cookbook.Category.Category;
+import pp.spring.cookbook.category.Category;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +19,7 @@ public class RecipeController {
     public RecipeController(RecipeService recipeService) {
         this.recipeService = recipeService;
     }
+
     @GetMapping("/recipes")
     public String recipes(Model model, @RequestParam(required = false) Category category) {
         List<Recipe> recipes;
@@ -60,7 +61,7 @@ public class RecipeController {
     @PostMapping("/recipe/{id}/edit")
     public String editRecipe(@PathVariable Long id, Recipe recipe) {
         Recipe recipeToEdit = recipeService.findById(id)
-            .orElseThrow(() -> new IllegalArgumentException("Id not found"));
+            .orElseThrow(() -> new IllegalArgumentException("Recipe with id " + id + " not found"));
         recipeService.editRecipeService(recipe, id);
         recipeService.save(recipeToEdit);
         return "redirect:/recipe/" + recipeToEdit.getId();
@@ -87,6 +88,6 @@ public class RecipeController {
     @GetMapping("/recipe/{id}/like")
     public String addLike(@PathVariable Long id) {
         recipeService.addLike(id);
-        return "redirect:/recipe/" + id;
+        return "redirect:/";
     }
 }

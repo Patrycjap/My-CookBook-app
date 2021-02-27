@@ -9,13 +9,12 @@
     <div>
         <a href="/recipes" class="btn btn-primary mb-3">All recipes</a>
         <a href="/recipe/add" class="btn btn-primary mb-3">Add recipe</a>
-        <a th:href="|/ingredient/add|" class="btn btn-primary mb-3">Add ingredient</a>
     </div>
     <h1 style="text-align: center" class="mt-4">TOP SPANISH RECIPES!</h1>
     <br>
-    <div class="row mb-2">
-        <div class="col-md-6">
-            <div th:each="recipe: ${bestRecipes}" class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+    <div class="row mb-1">
+        <div class="col-md-6" th:each="recipe: ${bestRecipes}">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                 <div class="col p-4 d-flex flex-column position-static">
                     <div>
                         <h2 th:text="${recipe.title}"></h2>
