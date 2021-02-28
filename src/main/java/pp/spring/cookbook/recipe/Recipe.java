@@ -17,7 +17,6 @@ public class Recipe {
     @Column(columnDefinition = "varchar(500)")
     private String description;
     private String preparationTime;
-
     private int portions;
 
     @Enumerated(EnumType.STRING)

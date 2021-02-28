@@ -37,7 +37,7 @@ public class RecipeService {
 
     public void editRecipeService(Recipe recipe, Long id) {
         Recipe recipeToEdit = recipeRepository.findById(id)
-            .orElseThrow(() -> new IllegalArgumentException("Id not found"));
+            .orElseThrow(() -> new IllegalArgumentException("Recipe with id " + id + " not found"));
         recipeToEdit.setTitle(recipe.getTitle());
         recipeToEdit.setDescription(recipe.getDescription());
         recipeToEdit.setPortions(recipe.getPortions());
