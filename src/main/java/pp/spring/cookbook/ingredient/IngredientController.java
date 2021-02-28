@@ -19,7 +19,7 @@ public class IngredientController {
     }
 
     @GetMapping("/ingredient/add")
-    public String addIngredient(Model model, @RequestParam(required = false) Long recipeId) {
+    public String addIngredientForm(Model model, @RequestParam(required = false) Long recipeId) {
         Ingredient ingredient = new Ingredient();
         ingredient.setRecipe(recipeService.findById(recipeId)
             .orElseThrow(() -> new IllegalArgumentException("Recipe with id " + recipeId + " not found")));
