@@ -14,3 +14,9 @@ VALUES
 (5, 'Orange','1/2',2),
 (6, 'Orange juice','3/4 cup',2),
 (7, 'Ice','1 cup',2);
+
+INSERT INTO user(id, email, password)
+VALUES (1, 'admin123@byom.de', '{noop}a'), (2, 'pat@byom.de', '{noop}a');
+
+INSERT INTO user_role(user_id, role)
+VALUES (1, 'ROLE_ADMIN'), (1, 'ROLE_USER'), (2, 'ROLE_USER')

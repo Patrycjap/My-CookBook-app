@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments :: head">
+</head>
+<body>
+<div th:replace="fragments :: header"></div>
+<div class="contentText">
+    <br>
+    <p th:if="${showErrorMessage}" style="text-align: center">Niepoprawne logowanie!</p>
+    <br>
+    <h2 style="text-align: center" class="mt-4">Login to application</h2>
+
+    <form th:action="@{/login}" method="post">
+        <div class="mb-3">
+            <label for="login" class="form-label">Login</label>
+            <input type="email" placeholder="Email" required class="form-control" id="login">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" placeholder="Password" required class="form-control" id="password">
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary mb-3">Login</button>
+        </div>
+    </form>
+
+</div>
+</body>
+</html>

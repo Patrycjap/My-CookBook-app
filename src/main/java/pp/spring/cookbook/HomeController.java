@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import pp.spring.cookbook.recipe.RecipeService;
+import pp.spring.cookbook.user.User;
 
 @Controller
 public class HomeController {
