@@ -24,7 +24,6 @@ public class AdminController {
     public String adminPanel(Model model) {
         List<User> users = userService.findAllWithoutCurrentUser();
         model.addAttribute("users", users);
-
         return "admin";
     }
 

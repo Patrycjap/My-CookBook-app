@@ -18,17 +18,10 @@ public class AuthenticationController {
     @GetMapping("/login")
     public String loginForm(@RequestParam(required = false) String error, Model model) {
         boolean showErrorMessage = false;
-        boolean showRegisterMessage = false;
-
         if (error != null) {
             showErrorMessage = true;
-        } else {
-            showRegisterMessage = true;
         }
-
         model.addAttribute("showErrorMessage", showErrorMessage);
-        model.addAttribute("showRegisterMessage", showRegisterMessage);
-
         return "login";
     }
 
@@ -50,5 +43,22 @@ public class AuthenticationController {
     public String successForm(Model model) {
         model.addAttribute("user", new User());
         return "success";
+    }
+
+    @GetMapping("/reset")
+    public String resetForm() {
+        return "resetForm";
+    }
+
+    @PostMapping("/reset")
+    public String resetPasswordLinkSend(@RequestParam String email) {
+        userService.sendPasswordResetLink(email);
+        return "resetFormSend";
+    }
+
+    @PostMapping("/resetEnding")
+    public String resetPasswordLinkSend(@RequestParam String key, @RequestParam String password) {
+        userService.updateUserPassword(key, password);
+        return "redirect:/logowanie";
     }
 }
