@@ -40,4 +40,10 @@ public class AuthenticationController {
         userService.registerUser(username, rawPassword);
         return "redirect:/login";
     }
+
+    @GetMapping("/success")
+    public String successForm(Model model) {
+        model.addAttribute("user", new User());
+        return "success";
+    }
 }
