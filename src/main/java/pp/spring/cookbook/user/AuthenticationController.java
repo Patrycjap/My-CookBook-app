@@ -18,11 +18,16 @@ public class AuthenticationController {
     @GetMapping("/login")
     public String loginForm(@RequestParam(required = false) String error, Model model) {
         boolean showErrorMessage = false;
+        boolean showRegisterMessage = false;
 
         if (error != null) {
             showErrorMessage = true;
+        } else {
+            showRegisterMessage = true;
         }
+
         model.addAttribute("showErrorMessage", showErrorMessage);
+        model.addAttribute("showRegisterMessage", showRegisterMessage);
 
         return "login";
     }
