@@ -59,6 +59,6 @@ public class AuthenticationController {
     @PostMapping("/resetEnding")
     public String resetPasswordLinkSend(@RequestParam String key, @RequestParam String password) {
         userService.updateUserPassword(key, password);
-        return "redirect:/logowanie";
+        return "redirect:/login";
     }
 }

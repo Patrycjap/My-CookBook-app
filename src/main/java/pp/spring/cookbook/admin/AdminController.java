@@ -20,7 +20,7 @@ public class AdminController {
         this.userService = userService;
     }
 
-    @GetMapping("")
+    @GetMapping
     public String adminPanel(Model model) {
         List<User> users = userService.findAllWithoutCurrentUser();
         model.addAttribute("users", users);

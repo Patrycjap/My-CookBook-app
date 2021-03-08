@@ -43,11 +43,11 @@ public class UserService {
 
     public List<User> findAllWithoutCurrentUser() {
         Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
-        return userRepository.findAll()
-            .stream()
+        return userRepository.findAll().stream()
             .filter(user -> !user.getEmail().equals(currentUser.getName()))
             .collect(Collectors.toList());
     }
+
 
     public void sendPasswordResetLink(String email) {
         userRepository.findByEmail(email).ifPresent(user -> {

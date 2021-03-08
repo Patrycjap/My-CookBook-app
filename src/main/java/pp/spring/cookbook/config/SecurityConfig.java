@@ -9,16 +9,23 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import javax.management.relation.Role;
+
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/").permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/recipes").authenticated()
-                .antMatchers("/recipe/add").authenticated()
-//                .antMatchers("/admin/**").hasRole("Admin")
-                .anyRequest().permitAll()
+                .antMatchers("/recipe/**").authenticated()
+                .antMatchers("/register").permitAll()
+                .antMatchers("/login").permitAll()
+                .antMatchers("/style.css").permitAll()
+                .antMatchers("/header.jpg").permitAll()
+                .anyRequest().authenticated()
             .and()
                 .formLogin()
                 .loginPage("/login")

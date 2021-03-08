@@ -19,4 +19,4 @@ INSERT INTO user(id, email, password)
 VALUES (1, 'admin123@byom.de', '{noop}a'), (2, 'pat@byom.de', '{noop}a');
 
 INSERT INTO user_role(user_id, role)
-VALUES (1, 'ROLE_ADMIN'), (1, 'ROLE_USER'), (2, 'ROLE_USER')
+VALUES (1, 'ROLE_ADMIN'), (2, 'ROLE_USER'),(1, 'ROLE_USER')
