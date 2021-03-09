@@ -5,12 +5,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pp.spring.cookbook.mail.MailSenderService;
+import pp.spring.cookbook.recipe.Recipe;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -48,6 +46,13 @@ public class UserService {
             .collect(Collectors.toList());
     }
 
+    public List<User> findCurrentUser() {
+        Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
+        return userRepository.findAll().stream()
+            .filter(user -> user.getEmail().equals(currentUser.getName()))
+            .collect(Collectors.toList());
+    }
+
 
     public void sendPasswordResetLink(String email) {
         userRepository.findByEmail(email).ifPresent(user -> {
@@ -71,4 +76,25 @@ public class UserService {
             }
         );
     }
+
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
+    }
+
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+    public void editUserService(User user, Long id) {
+        User userToEdit = userRepository.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException("User with id " + id + " not found"));
+        userToEdit.setEmail(user.getEmail());
+        userToEdit.setPassword(user.getPassword());
+        userToEdit.setRoles(user.getRoles());
+    }
+
+    public void save(User user) {
+        userRepository.save(user);
+    }
 }
+

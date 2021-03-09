@@ -3,8 +3,13 @@ package pp.spring.cookbook.user;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import pp.spring.cookbook.recipe.Recipe;
+
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class AuthenticationController {
@@ -30,6 +35,7 @@ public class AuthenticationController {
         model.addAttribute("user", new User());
         return "register";
     }
+
 
     @PostMapping("/register")
     public String register(User user) {
@@ -60,5 +66,33 @@ public class AuthenticationController {
     public String resetPasswordLinkSend(@RequestParam String key, @RequestParam String password) {
         userService.updateUserPassword(key, password);
         return "redirect:/login";
+    }
+
+    @GetMapping("/user")
+    public String userPanel(Model model) {
+        List<User> user = userService.findCurrentUser();
+        model.addAttribute("user", user);
+        return "/user";
+    }
+
+    @GetMapping("/user/{id}/edit")
+    public String userEditForm(@PathVariable Long id, Model model) {
+        Optional<User> userEditOptional = userService.findById(id);
+        if (userEditOptional.isPresent()) {
+            User user = userEditOptional.get();
+            model.addAttribute("userEdit", user);
+            return "userEdit";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+    @PostMapping("/user/{id}/edit")
+    public String editUser(@PathVariable Long id, User user) {
+        User userToEdit = userService.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException("User with id " + id + " not found"));
+        userService.editUserService(user, id);
+        userService.save(userToEdit);
+        return "redirect:/recipe/" + userToEdit.getId();
     }
 }

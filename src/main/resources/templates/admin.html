@@ -19,7 +19,6 @@
             <th>id</th>
             <th>Email</th>
             <th>Role</th>
-            <th></th>
             <th>#</th>
         </tr>
         </thead>
@@ -27,7 +26,7 @@
         <tr th:each="user: ${users}">
             <td th:text="${user.id}"></td>
             <td th:text="${user.email}"></td>
-            <td th:text="${user.roles}"></td>
+            <td th:each="role : ${user.roles}" th:text="|${role.getRole().displayName}|"></td>
             <td>
                 <a th:href="|/admin/deleteUser/${user.id}|">Delete</a>
             </td>
