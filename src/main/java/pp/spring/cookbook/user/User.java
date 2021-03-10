@@ -9,15 +9,16 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String email;
-
     private String password;
 
     @OneToMany(mappedBy = "user", cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
     private Set<UserRole> roles;
 
     private String passwordResetKey;
+    private String firstName;
+    private String lastName;
+
 
     public Long getId() {
         return id;
@@ -57,5 +58,21 @@ public class User {
 
     public void setPasswordResetKey(String passwordResetKey) {
         this.passwordResetKey = passwordResetKey;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }

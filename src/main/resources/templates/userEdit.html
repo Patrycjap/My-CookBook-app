@@ -12,22 +12,20 @@
     <h2 class="mt-4" style="text-align: center">Edit user</h2>
     <form th:action="|/user/${userEdit.id}/edit|" method="post" th:object="${userEdit}">
         <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="text" required class="form-control" id="email" th:field="*{email}">
+            <label for="email" class="form-label">Unsername (email)</label>
+            <input type="email" required class="form-control" id="email" th:field="*{email}">
+        </div>
+        <div class="mb-3">
+            <label for="firstName" class="form-label">Name</label>
+            <input type="text" required class="form-control" id="firstName" th:field="*{firstName}">
+        </div>
+        <div class="mb-3">
+            <label for="lastName" class="form-label">Last name</label>
+            <input type="text" required class="form-control" id="lastName" th:field="*{lastName}">
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>
             <input type="text" required class="form-control" id="password" th:field="*{password}">
-        </div>
-        <div class="mb-3">
-            <label for="category" class="form-label">Category</label>
-            <select class="form-select" required id="category" th:field="*{roles}">
-                <option selected value="" hidden>Brak</option>
-                <option th:each="role : ${T(pp.spring.cookbook.user.Role).values()}"
-                        th:value="${role}"
-                        th:text="${role}">
-                </option>
-            </select>
         </div>
         <div class="mb-3">
             <button type="submit" class="btn btn-primary mb-3">Save</button>

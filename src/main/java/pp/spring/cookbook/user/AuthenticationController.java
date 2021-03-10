@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import pp.spring.cookbook.recipe.Recipe;
 
 import java.util.List;
 import java.util.Optional;
@@ -93,6 +92,6 @@ public class AuthenticationController {
             .orElseThrow(() -> new IllegalArgumentException("User with id " + id + " not found"));
         userService.editUserService(user, id);
         userService.save(userToEdit);
-        return "redirect:/recipe/" + userToEdit.getId();
+        return "redirect:/user";
     }
 }
