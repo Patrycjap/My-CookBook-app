@@ -22,10 +22,12 @@ public class UserService {
         this.mailSenderService = mailSenderService;
     }
 
-    public void registerUser(String username, String rawPassword) {
+    public void registerUser(String username, String rawPassword, String firstName, String lastName) {
         User userToAdd = new User();
 
         userToAdd.setEmail(username);
+        userToAdd.setFirstName(firstName);
+        userToAdd.setLastName(lastName);
         String encryptedPassword = passwordEncoder.encode(rawPassword);
         userToAdd.setPassword(encryptedPassword);
         List<UserRole> list = Collections.singletonList(new UserRole(userToAdd, Role.ROLE_USER));
@@ -83,13 +85,17 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public void editUserService(User user, Long id) {
+    public void saveEditedUser(User user, Long id) {
         User userToEdit = userRepository.findById(id)
             .orElseThrow(() -> new IllegalArgumentException("User with id " + id + " not found"));
         userToEdit.setEmail(user.getEmail());
-        userToEdit.setPassword(user.getPassword());
+        userToEdit.setFirstName(user.getFirstName());
+        userToEdit.setLastName(user.getLastName());
+        userToEdit.setPassword("{noop}" + user.getPassword());
         userToEdit.setRoles(user.getRoles());
+        userRepository.save(userToEdit);
     }
+
     public void save(User user) {
         userRepository.save(user);
     }

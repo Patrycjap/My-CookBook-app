@@ -22,10 +22,15 @@ public class AuthenticationController {
     @GetMapping("/login")
     public String loginForm(@RequestParam(required = false) String error, Model model) {
         boolean showErrorMessage = false;
+        boolean showSuccessMessage = false;
         if (error != null) {
             showErrorMessage = true;
+
+        } else {
+            showSuccessMessage = true;
         }
         model.addAttribute("showErrorMessage", showErrorMessage);
+        model.addAttribute("showSuccessMessage", showSuccessMessage);
         return "login";
     }
 
@@ -35,12 +40,13 @@ public class AuthenticationController {
         return "register";
     }
 
-
     @PostMapping("/register")
     public String register(User user) {
         String username = user.getEmail();
         String rawPassword = user.getPassword();
-        userService.registerUser(username, rawPassword);
+        String firstName = user.getFirstName();
+        String lastName = user.getLastName();
+        userService.registerUser(username, rawPassword, firstName, lastName);
         return "redirect:/login";
     }
 
@@ -90,7 +96,7 @@ public class AuthenticationController {
     public String editUser(@PathVariable Long id, User user) {
         User userToEdit = userService.findById(id)
             .orElseThrow(() -> new IllegalArgumentException("User with id " + id + " not found"));
-        userService.editUserService(user, id);
+        userService.saveEditedUser(user, id);
         userService.save(userToEdit);
         return "redirect:/user";
     }
