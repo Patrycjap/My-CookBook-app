@@ -38,8 +38,7 @@ public class AuthenticationController {
     public String register(User user, @RequestParam(required = false) String error, Model model) {
         boolean showErrorMessage = false;
         if (error != null) {
-            showErrorMessage = true;
-            model.addAttribute("showErrorMessage", showErrorMessage);
+            model.addAttribute("showErrorMessage", true);
             return "register";
         } else {
             String firstName = user.getFirstName();

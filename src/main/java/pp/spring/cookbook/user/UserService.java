@@ -22,12 +22,12 @@ public class UserService {
         this.mailSenderService = mailSenderService;
     }
 
-    public void registerUser(String username, String rawPassword, String firstName, String lastName) {
+    public void registerUser(String firstName, String lastName, String username, String rawPassword) {
         User userToAdd = new User();
 
-        userToAdd.setEmail(username);
         userToAdd.setFirstName(firstName);
         userToAdd.setLastName(lastName);
+        userToAdd.setEmail(username);
         String encryptedPassword = passwordEncoder.encode(rawPassword);
         userToAdd.setPassword(encryptedPassword);
         List<UserRole> list = Collections.singletonList(new UserRole(userToAdd, Role.ROLE_USER));
