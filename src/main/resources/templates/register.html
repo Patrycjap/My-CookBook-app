@@ -10,14 +10,17 @@
         <div class="mb-3">
             <label for="firstName" class="form-label">Name</label>
             <input type="text" id="firstName" required class="form-control" th:field="*{firstName}">
+            <p style="color: red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
         </div>
         <div class="mb-3">
             <label for="lastName" class="form-label">Surname</label>
             <input type="text" id="lastName" required class="form-control" th:field="*{lastName}">
+            <p style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">Username (email)</label>
             <input type="email" id="email" required class="form-control" th:field="*{email}">
+            <p style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>

@@ -2,8 +2,10 @@ package pp.spring.cookbook.user;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,9 +37,11 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public String register(User user, @RequestParam(required = false) String error, Model model) {
+    public String register(Model model, @ModelAttribute User user,
+                           BindingResult bindResult) {
         boolean showErrorMessage = false;
-        if (error != null) {
+
+        if (bindResult.hasErrors()) {
             showErrorMessage = true;
             model.addAttribute("showErrorMessage", showErrorMessage);
             return "register";
