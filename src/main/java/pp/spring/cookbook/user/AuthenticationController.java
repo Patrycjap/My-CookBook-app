@@ -37,13 +37,10 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public String register(Model model, @ModelAttribute User user,
+    public String register(Model model, @Valid @ModelAttribute User user,
                            BindingResult bindResult) {
-        boolean showErrorMessage = false;
-
         if (bindResult.hasErrors()) {
-            showErrorMessage = true;
-            model.addAttribute("showErrorMessage", showErrorMessage);
+            model.addAttribute("showErrorMessage", true);
             return "register";
         } else {
             String firstName = user.getFirstName();
@@ -51,7 +48,7 @@ public class AuthenticationController {
             String email = user.getEmail();
             String rawPassword = user.getPassword();
             userService.registerUser(firstName, lastName, email, rawPassword);
-            model.addAttribute("showErrorMessage", showErrorMessage);
+            model.addAttribute("showErrorMessage", false);
             model.addAttribute("showSuccessMessage", true);
             return "redirect:/login";
         }
