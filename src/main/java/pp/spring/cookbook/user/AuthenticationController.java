@@ -2,10 +2,7 @@ package pp.spring.cookbook.user;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,15 +19,12 @@ public class AuthenticationController {
     @GetMapping("/login")
     public String loginForm(@RequestParam(required = false) String error, Model model) {
         boolean showErrorMessage = false;
-        boolean showSuccessMessage = false;
+
         if (error != null) {
             showErrorMessage = true;
-
-        } else {
-            showSuccessMessage = true;
         }
         model.addAttribute("showErrorMessage", showErrorMessage);
-        model.addAttribute("showSuccessMessage", showSuccessMessage);
+        model.addAttribute("showSuccessMessage", false);
         return "login";
     }
 
@@ -41,13 +35,22 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public String register(User user) {
-        String username = user.getEmail();
-        String rawPassword = user.getPassword();
-        String firstName = user.getFirstName();
-        String lastName = user.getLastName();
-        userService.registerUser(username, rawPassword, firstName, lastName);
-        return "redirect:/login";
+    public String register(User user, @RequestParam(required = false) String error, Model model) {
+        boolean showErrorMessage = false;
+        if (error != null) {
+            showErrorMessage = true;
+            model.addAttribute("showErrorMessage", showErrorMessage);
+            return "register";
+        } else {
+            String firstName = user.getFirstName();
+            String lastName = user.getLastName();
+            String email = user.getEmail();
+            String rawPassword = user.getPassword();
+            userService.registerUser(firstName, lastName, email, rawPassword);
+            model.addAttribute("showErrorMessage", showErrorMessage);
+            model.addAttribute("showSuccessMessage", true);
+            return "redirect:/login";
+        }
     }
 
     @GetMapping("/success")
