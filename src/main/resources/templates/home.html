@@ -12,28 +12,28 @@
         <a href="/recipes" class="btn btn-primary mb-3">All recipes</a>
         <a href="/recipe/add" class="btn btn-primary mb-3">Add recipe</a>
         <a sec:authorize="hasRole('ROLE_ADMIN')" href="/admin" class="btn btn-primary mb-3">Admin panel</a>
-        <a sec:authorize="hasRole('ROLE_USER')" th:href="|/user|" class="btn btn-primary mb-3" >User panel</a>
-        <a a sec:authorize="isAuthenticated()" href="/logout" class="btn btn-primary mb-3" >Logout</a>
-    <br>
-    <h1 style="text-align: center" class="mt-4">TOP SPANISH RECIPES!</h1>
-    <br>
-    <div class="row mb-1">
-        <div class="col-md-6" th:each="recipe: ${bestRecipes}">
-            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                <div class="col p-4 d-flex flex-column position-static">
-                    <div>
-                        <h2 th:text="${recipe.title}"></h2>
-                        <p th:text="|Preparation time: ${recipe.preparationTime} min|"></p>
-                        <p th:text="|Category: ${recipe.category}|"></p>
-                        <p th:text="|Portions: ${recipe.portions}|"></p>
-                        <a th:href="|/recipe/${recipe.id}|" class="btn btn-primary mb-3">Show recipe</a>
-                        <p th:text="|Likes: ${recipe.countLike}|"></p>
-                        <a th:href="|/recipe/${recipe.id}/like|" class="btn btn-primary mb-3">Like</a>
+        <a sec:authorize="hasRole('ROLE_USER')" th:href="|/user|" class="btn btn-primary mb-3">User panel</a>
+        <a a sec:authorize="isAuthenticated()" href="/logout" class="btn btn-primary mb-3">Logout</a>
+        <br>
+        <h1 style="text-align: center" class="mt-4">TOP SPANISH RECIPES!</h1>
+        <br>
+        <div class="row mb-1">
+            <div class="col-md-6" th:each="recipe: ${bestRecipes}">
+                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <div>
+                            <h2 th:text="${recipe.title}"></h2>
+                            <p th:text="|Preparation time: ${recipe.preparationTime} min|"></p>
+                            <p th:text="|Category: ${recipe.category}|"></p>
+                            <p th:text="|Portions: ${recipe.portions}|"></p>
+                            <a th:href="|/recipe/${recipe.id}|" class="btn btn-primary mb-3">Show recipe</a>
+                            <p th:text="|Likes: ${recipe.countLike}|"></p>
+                            <a th:href="|/recipe/${recipe.id}/like|" class="btn btn-primary mb-3">Like</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 </div>
 </body>
 </html>

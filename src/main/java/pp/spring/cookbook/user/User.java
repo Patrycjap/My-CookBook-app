@@ -1,6 +1,9 @@
 package pp.spring.cookbook.user;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
@@ -9,14 +12,23 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Email(message = "Please enter email format")
     private String email;
+
     private String password;
 
     @OneToMany(mappedBy = "user", cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
     private Set<UserRole> roles;
 
     private String passwordResetKey;
+
+    @NotBlank(message = "Filed cannot be empty. Please enter a valid name.")
+    @Size(min = 3, message = "Filed should contain minimum 3 characters")
     private String firstName;
+
+    @NotBlank(message = "Filed can not be empty")
+    @Size(min = 3, message = "Filed should contain minimum 3 characters. Please enter a valid surname.")
     private String lastName;
 
 

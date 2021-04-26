@@ -2,8 +2,11 @@ package pp.spring.cookbook.user;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,14 +20,13 @@ public class AuthenticationController {
     }
 
     @GetMapping("/login")
-    public String loginForm(@RequestParam(required = false) String error, Model model) {
+    public String loginForm(@RequestParam(required = false) String error, RedirectAttributes redirectAttributes) {
         boolean showErrorMessage = false;
-
         if (error != null) {
             showErrorMessage = true;
         }
-        model.addAttribute("showErrorMessage", showErrorMessage);
-        model.addAttribute("showSuccessMessage", false);
+        redirectAttributes.addFlashAttribute("showErrorMessage", showErrorMessage);
+        redirectAttributes.addFlashAttribute("showSuccessMessage", false);
         return "login";
     }
 
@@ -35,10 +37,12 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public String register(User user, @RequestParam(required = false) String error, Model model) {
+    public String register(@Valid @ModelAttribute User user,
+                           BindingResult bindResult,
+                           RedirectAttributes redirectAttributes) {
         boolean showErrorMessage = false;
-        if (error != null) {
-            model.addAttribute("showErrorMessage", true);
+        if (bindResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("showErrorMessage", showErrorMessage);
             return "register";
         } else {
             String firstName = user.getFirstName();
@@ -46,8 +50,8 @@ public class AuthenticationController {
             String email = user.getEmail();
             String rawPassword = user.getPassword();
             userService.registerUser(firstName, lastName, email, rawPassword);
-            model.addAttribute("showErrorMessage", showErrorMessage);
-            model.addAttribute("showSuccessMessage", true);
+            redirectAttributes.addFlashAttribute("showErrorMessage", showErrorMessage);
+            redirectAttributes.addFlashAttribute("showSuccessMessage", true);
             return "redirect:/login";
         }
     }
