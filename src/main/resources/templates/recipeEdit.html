@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments :: head">
+</head>
+<body>
+<div th:replace="fragments :: header"></div>
+<div class="contentText">
+    <br>
+    <div>
+        <a class="btn btn-primary" href="/" role="button">Home</a>
+    </div>
+    <h2 class="mt-4" style="text-align: center">Edit recipe</h2>
+    <form th:action="|/recipe/${recipeEdit.id}/edit|" method="post" th:object="${recipeEdit}">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" required class="form-control" id="title" th:field="*{title}">
+        </div>
+        <div class="mb-3">
+            <label for="preparationTime" class="form-label">Preparation time (minutes)</label>
+            <input type="text" required class="form-control" id="preparationTime" th:field="*{preparationTime}">
+        </div>
+        <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <select class="form-select" required id="category" th:field="*{category}">
+                <option selected value="" hidden>Brak</option>
+                <option th:each="category : ${T(pp.spring.cookbook.category.Category).values()}"
+                        th:value="${category}"
+                        th:text="${category.displayName}">
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea id="description" th:field="*{description}" class="form-control"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="portions" class="form-label">Portions</label>
+            <input type="text" required class="form-control" id="portions" th:field="*{portions}">
+        </div>
+        <div>
+            <p>Ingredients:</p>
+            <ul>
+                <li th:each="ingredient: ${recipeEdit.ingredients}">
+                    <a th:text="|${ingredient.name} ${ingredient.quantity}|"></a>
+                </li>
+            </ul>
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary mb-3">Save</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
