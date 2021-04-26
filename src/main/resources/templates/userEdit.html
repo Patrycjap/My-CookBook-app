@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments :: head">
+</head>
+<body>
+<div th:replace="fragments :: header"></div>
+<div class="contentText">
+    <br>
+    <div>
+        <a class="btn btn-primary" href="/" role="button">Home</a>
+    </div>
+    <h2 class="mt-4" style="text-align: center">Edit user</h2>
+    <form th:action="|/user/${userEdit.id}/edit|" method="post" th:object="${userEdit}">
+        <div class="mb-3">
+            <label for="email" class="form-label">Unsername (email)</label>
+            <input type="email" required class="form-control" id="email" th:field="*{email}">
+        </div>
+        <div class="mb-3">
+            <label for="firstName" class="form-label">Name</label>
+            <input type="text" required class="form-control" id="firstName" th:field="*{firstName}">
+        </div>
+        <div class="mb-3">
+            <label for="lastName" class="form-label">Last name</label>
+            <input type="text" required class="form-control" id="lastName" th:field="*{lastName}">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" required class="form-control" id="password" th:field="*{password}">
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary mb-3">Save</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

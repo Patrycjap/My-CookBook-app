@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments :: head">
+</head>
+<body>
+<div th:replace="fragments :: header"></div>
+
+<div class="contentText">
+    <br>
+    <div>
+        <a class="btn btn-primary" href="/" role="button">Home</a>
+        <a class="btn btn-primary" href="/logout" role="button">Logout</a>
+    </div>
+    <br>
+    <h2 class="mt-4" style="text-align: center">List of users</h2>
+    <table class="table  mt-4">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>#</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user: ${users}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:each="role : ${user.roles}" th:text="|${role.getRole().displayName}|"></td>
+            <td>
+                <a th:href="|/admin/deleteUser/${user.id}|">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
