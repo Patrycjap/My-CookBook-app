@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments :: head">
+</head>
+<body>
+<div th:replace="fragments :: header"></div>
+<div class="contentText">
+    <br>
+    <div>
+        <a class="btn btn-primary" href="/" role="button">Home</a>
+    </div>
+    <br>
+    <h1 style="text-align: center" class="mt-4">User panel</h1>
+    <br>
+    <div th:each="user: ${user}"
+         class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+            <div>
+                <p th:text="|Username: ${user.email}|"></p>
+                <p th:text="|Name: ${user.firstName}|"></p>
+                <p th:text="|Surname: ${user.lastName}|"></p>
+                <p th:each="role : ${user.roles}" th:text="|Role: ${role.getRole().displayName}|"></p>
+                <a th:href="|/user/${user.id}/edit|" class="btn btn-primary mb-3">Edit</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

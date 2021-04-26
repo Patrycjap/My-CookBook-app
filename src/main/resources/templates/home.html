@@ -1,15 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:include="fragments :: head">
 </head>
 <body>
 <div th:replace="fragments :: header"></div>
 <div class="contentText">
     <br>
-    <div>
+    <a>
+        <a a sec:authorize="!isAuthenticated()" href="/register" class="btn btn-primary mb-3">Register</a>
+        <a sec:authorize="!isAuthenticated" href="/login" class="btn btn-primary mb-3">Login</a>
         <a href="/recipes" class="btn btn-primary mb-3">All recipes</a>
         <a href="/recipe/add" class="btn btn-primary mb-3">Add recipe</a>
-    </div>
+        <a sec:authorize="hasRole('ROLE_ADMIN')" href="/admin" class="btn btn-primary mb-3">Admin panel</a>
+        <a sec:authorize="hasRole('ROLE_USER')" th:href="|/user|" class="btn btn-primary mb-3" >User panel</a>
+        <a a sec:authorize="isAuthenticated()" href="/logout" class="btn btn-primary mb-3" >Logout</a>
+    <br>
     <h1 style="text-align: center" class="mt-4">TOP SPANISH RECIPES!</h1>
     <br>
     <div class="row mb-1">
