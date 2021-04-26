@@ -4,7 +4,7 @@
 Application cookbook was created using following technologies: Spring, MVC, Thymeleaf, Security.
 To save data uses H2 database.
 
-###Main functionalities:
+### Main functionalities:
 * Login user
 * Register user
 * Add recipe
