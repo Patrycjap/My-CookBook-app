@@ -9,6 +9,8 @@
 * Add recipe
 * Edit recipe
 * Delete recipe
+* Show list of all recipes
+* Show list of recipes sorted by category
 
 
 
