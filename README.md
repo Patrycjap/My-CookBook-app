@@ -3,7 +3,7 @@
 ### Description
 
 
-###Main funcionalities:
+### Main funcionalities:
 
 * Login/ register
 * Add recipe
