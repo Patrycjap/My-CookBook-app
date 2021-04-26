@@ -3,14 +3,13 @@
 </head>
 <body>
 <div th:replace="fragments :: header"></div>
-<body>
 <div class="contentText">
     <h2 style="text-align: center" class="mt-4">Register</h2>
     <form th:action="@{/register}" method="post" th:object="${user}">
         <div class="mb-3">
             <label for="firstName" class="form-label">Name</label>
             <input type="text" id="firstName" required class="form-control" th:field="*{firstName}">
-            <p style="color: red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
+            <p style="color: #ff0000" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
         </div>
         <div class="mb-3">
             <label for="lastName" class="form-label">Surname</label>
